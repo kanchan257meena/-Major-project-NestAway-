@@ -1,6 +1,153 @@
-body{
-    /* background-color: lightpink; */
+/* COLOR CLASS */
+.red {
+    color: #d90429;
 }
-.navbar{
+
+.blue {
+    color: #2b2d42;
+}
+
+.grey {
+    color: #8d99ae;
+}
+
+
+
+body {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+
+}
+
+.container {
+    flex: 1;
+}
+
+.navbar {
     height: 5rem;
+    background-color: #edf2f4;
 }
+
+.navbar-brand {
+    color: #d90429;
+}
+
+.nav-link {
+    color: #2b2d42;
+}
+
+/* 
+2b2d42 dark
+
+
+
+edf2f4 light
+
+*/
+
+
+/* footer */
+
+.f-info-links a {
+    text-decoration: none;
+    color: #2b2d42;
+}
+
+.f-info-links :hover {
+    text-decoration: underline;
+    color: black;
+}
+
+.f-info {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    height: 8rem;
+    /* justify-content: center; */
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #edf2f4;
+}
+
+.f-info-socials {
+    font-size: 1.2rem;
+    display: flex;
+    /* color: #8d99ae; */
+    width: 100px;
+    justify-content: space-around;
+}
+
+
+.f-info-socials :hover {
+    text-decoration: underline;
+    color: black;
+}
+
+/* cards */
+.card {
+    display: flex;
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 0;
+    margin-top: 10px;
+}
+
+.card-title {
+    text-decoration: none;
+    color: #d90429;
+
+}
+
+.details {
+    text-decoration: none;
+    color: #2b2d42;
+    font-weight: 550;
+}
+
+/* Card Effect */
+.card-img-overlay {
+    /* opacity: 0; */
+}
+
+.card-img-overlay:hover {
+    /* opacity: 0.2; */
+    /* background-color: white; */
+}
+
+
+
+/* SHOW */
+
+
+.show-img{
+    max-height: 50vh;
+    max-width: 600px;
+}
+
+.show-card-text{
+    font-size: large;
+    font-weight: 550;
+}
+
+.show-btns{
+    display: flex;
+   /* justify-content:center; */
+  
+}
+.show-btn{
+ background-color:  #d90429; 
+   border: none;
+   margin-right: 60px;
+}
+

@@ -1,18 +1,35 @@
 <% layout('/layouts/boilerplate') -%>
-<body>
-     <h3>listing Details :</h3>
-    <ul>
-        <li><%= listing.title  %></li>
-        <li><%= listing.description  %></li>
-        <!-- to represent the amount as per indian standards
-         we will use num.toLocalString() -->
-        <li> &#8377; <%= listing.price.toLocaleString("en-IN")  %></li>
-        <li><%= listing.location  %></li>
-        <li><%= listing.country  %></li> 
-    </ul>
-    <a href="/listings/<%= listing.id  %>/edit"> Edit this listing</a>
-    <br><br>
-    <form method="post" action="/listings/<%= listing.id  %>?_method=Delete"> 
-        <button>Delete</button>
-    </form>
-</body>
+
+    <body>
+
+        <div class="row">
+            <div class="col offset-3">
+                <br>
+
+                <h3 class="red">Listing Details :</h3>
+
+                <div class="card ">
+                    <img src="<%= listing.image.url  %>" class="card-img-top show-img" alt="...">
+                    <div class="card-body">
+                        <p class="card-text show-card-text blue">
+                            <%= listing.title %>
+                        </p>
+                        <%= listing.description %> <br>
+                            &#8377; <%= listing.price.toLocaleString("en-IN") %> <br>
+                                <%= listing.location %> <br>
+                                    <%= listing.country %> <br>
+                    </div>
+                </div>
+
+
+                <div class="show-btns">
+                <a href="/listings/<%= listing.id  %>/edit"class="btn btn-dark show-btn"  > Edit this listing</a>
+                
+                <form method="post" action="/listings/<%= listing.id  %>?_method=Delete">
+                    <button class="btn btn-dark show-btn" >Delete</button>
+                </form>
+                </div>
+                <br>
+            </div>
+        </div>
+    </body>
