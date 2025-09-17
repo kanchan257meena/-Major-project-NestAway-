@@ -1,0 +1,18 @@
+<% layout('/layouts/boilerplate') -%>
+<body>
+     <h3>listing Details :</h3>
+    <ul>
+        <li><%= listing.title  %></li>
+        <li><%= listing.description  %></li>
+        <!-- to represent the amount as per indian standards
+         we will use num.toLocalString() -->
+        <li> &#8377; <%= listing.price.toLocaleString("en-IN")  %></li>
+        <li><%= listing.location  %></li>
+        <li><%= listing.country  %></li> 
+    </ul>
+    <a href="/listings/<%= listing.id  %>/edit"> Edit this listing</a>
+    <br><br>
+    <form method="post" action="/listings/<%= listing.id  %>?_method=Delete"> 
+        <button>Delete</button>
+    </form>
+</body>
