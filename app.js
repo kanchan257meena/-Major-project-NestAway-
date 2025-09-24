@@ -6,13 +6,14 @@ const path=require('path');
 const Listing=require("./MODELS/listing.js");
 const methodOverride=require('method-override');
 const ejsMate=require("ejs-mate");
+const wrapAsync=require("./Utils/wrapasync.js");
 
 app.set("view engine","ejs");
 app.set("views",path.join(__dirname,"views"));
 app.use(express.urlencoded({extended:true}));
 app.use(methodOverride("_method"));
 app.engine('ejs',ejsMate);
-app.use(express.static(path.join(__dirname,"/public")));
+app.use(express.static(path.join(__dirname,"public")));
 
 main().then((res)=>{
     console.log("connected to db");   
@@ -30,7 +31,7 @@ app.listen(8080,()=>{
 })
 
 app.get("/",(req,res)=>{
-    res.send("root page");
+    res.render("listings/home.ejs");
 })
 
 
@@ -50,14 +51,17 @@ app.get("/listings",async (req,res)=>{
 app.get("/listings/new",(req,res)=>{
     res.render("listings/new.ejs");
 })
-app.post("/listings", async(req,res)=>{
-//   let {title ,description,image,price,country,location}=req.body;  
-let newListing=new Listing(req.body.listing);
-await newListing.save();
-res.redirect("/listings")
-// console.log(listing);
 
-})
+app.post("/listings",wrapAsync( async(req,res,next)=>{
+//if anything goes wrong we'll send err
+
+  let newListing=new Listing(req.body.listing);
+await newListing.save();
+res.redirect("/listings");
+
+
+
+}))
 
 
 //show route  {return all the data , after we click on link this page will open}
@@ -111,6 +115,9 @@ app.delete("/listings/:id",async(req,res)=>{
     }
 })
 
+app.use((err,req,res,next)=>{
+  res.send("something went wrong");
+})
 
 
 
@@ -118,6 +125,7 @@ app.delete("/listings/:id",async(req,res)=>{
 
 
 
+ 
 
 
 

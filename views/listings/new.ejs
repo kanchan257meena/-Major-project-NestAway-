@@ -1,21 +1,21 @@
 <% layout('/layouts/boilerplate') -%>
 
-    <body>
+    
          <div class="row">
             <div class="col-8 offset-2">
                 <br><br>
         <h3 class="red">Create a new listing</h3>
-        <form method="post" action="/listings">
+        <form method="post" action="/listings"  class="needs-validation">
            
             <div class="mb-3">
                 <label for="title" class="form-label blue">Title</label>
-                <input class="form-control" type="text" name="listing[title]" placeholder="enter title">
+                <input class="form-control"  type="text" name="listing[title]" placeholder="enter title" required>
             </div>
 
             <div class="mb-3">
                 <label for="description" class="form-label blue">Description</label>
                 <textarea class="form-control" type="text" name="listing[description]"
-                    placeholder="enter description"></textarea>
+                    placeholder="enter description" required ></textarea>
             </div class="mb-3">
 
 
@@ -26,26 +26,26 @@
             <div class="row">
             <div class="mb-3 col-md-4">
                  <label for="price" class="form-label blue">Price</label>
-                <input class="form-control" type="number" name="listing[price]" placeholder="enter price">
+                <input  class="form-control" type="number" name="listing[price]" placeholder="enter price" required>
             </div>
 
             <div class="mb-3 col-md-8"> 
                 <label for="location" class="form-label blue">Location</label>
-                <input class="form-control" type="text" name="listing[location]" placeholder="enter location">
+                <input  class="form-control" type="text" name="listing[location]" placeholder="enter location" required>
             </div>
             </div>
 
             <div class="mb-3"> 
                 <label for="country" class="form-label blue">Country</label>
-                <input class="form-control" type="text" name="listing[country]" placeholder="enter country">
+                <input  class="form-control" type="text" name="listing[country]" placeholder="enter country" required>
             </div>
 
             <br>
-            <button class="btn btn-dark " style="background-color:  #d90429; border: none;" >Add</button>
+            <button class="btn btn-dark " type="submit" style="background-color:  #d90429; border: none;" >Add</button>
  <br> <br>
         </form>
        
         </div>
         </div>
-
-    </body>
+  <script src="</js/script.js"></script>
+   
