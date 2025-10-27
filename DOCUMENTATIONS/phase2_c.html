@@ -1,0 +1,50 @@
+<!-- Session -->
+ the time slot when the user is using or interacting with the web site is called a session.
+A Session is like a special folder created by the server
+ to store a user’s information while they are using the website.
+
+ <!-- What is “State”? -->
+
+State simply means remembering data or information about a user or system for some time.
+
+🧠 Think of “state” like memory.
+
+When you open a website, do something (like login, add items to cart, etc.),
+ the website needs to remember who you are or what you did 
+ — that is called maintaining state. protocol - (ftp)
+
+ there are also stateless protocol - do not save data (http)
+
+ <!-- Express Session -->
+ Express Session = a way for your website to remember a user
+  while they browse different pages.
+Normally, websites forget you on every page.
+ Express Session helps the server remember you.
+
+
+<!-- What is express-session (npm package)? -->
+
+express-session is an official middleware that manages sessions in Express.js.
+
+It:
+Creates and manages session IDs
+Stores session data on the server
+Sends session ID to the browser in a cookie
+Lets you easily access or update session info in req.session
+
+app.use(session({
+  secret: 'mySecretKey',        // used to sign session ID cookie (must be secret)
+  resave: false,                // don’t save session if nothing changed
+  saveUninitialized: true,      // save new sessions even if empty
+  cookie: { maxAge: 60000 }     // cookie expires after 1 minute
+}));
+
+The secret works like a password for your sessions —
+ it protects the data from being modified by anyone else.
+
+
+ <!-- connect flash --> it is an npm library
+  Connect Flash helps you show one-time messages to the user 
+  (like “Login Successful!” or “Error: Invalid Password”) and
+   then automatically removes them.
+ -> it is cumpulsory to use sessions to use flash  

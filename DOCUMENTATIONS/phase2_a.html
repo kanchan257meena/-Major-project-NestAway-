@@ -1,0 +1,51 @@
+Handling deletion (using Mongoose Middleware)
+
+we can use 2 middleware
+-> pre-run before the query is executed (
+    executed one after another, when each middleware calls next
+)
+-> post - run after the query is executed
+
+<a href="../../BACKEND/Database_reln/Models/customer.js">customer</a>
+
+find by id and delete calls find one and delete 
+which will call Mongoose middleware;
+
+
+<!-- NEW MODEL REVIEWS -->
+ -comment {string}
+ -rating(1 to 5) 
+ -createdAt {date ,time}
+
+
+ create a review schema and add and array in the listing schema
+
+ <!-- creting reviews -->
+  1.setting up the Review form
+
+  2.submitting the form 
+  here we will create a relationship of the review witht the listing(one to many)
+  post/listings/:id/reviews 
+
+  
+ <!-- Validation for reviews -->
+
+ empty review should not be submitted both from  server side and client side
+ use required for client side validation then bootstrap "needs-validation"
+
+server side validation 1- joi schema , 2- schema validation fn , 3- middleware
+
+<!-- Deleting reviews -->
+
+Mongo $pull operator
+
+The $pull operator in MongoDB is used to remove (pull out) 
+all instances of a value or values that match a given condition or value.
+
+delete btn -> listings/:id.review/:reviewId 
+
+<!-- Deleting Listing -->
+ Delete Middleware for Reviews
+
+
+

@@ -5,7 +5,7 @@
             <div class="col-8 offset-2">
                 <br><br>
         <h3 class="red">Create a new listing</h3>
-        <form method="post" action="/listings"  class="needs-validation">
+        <form method="post" action="/listings" novalidate class="needs-validation">
            
             <div class="mb-3">
                 <label for="title" class="form-label blue">Title</label>
@@ -39,7 +39,7 @@
                 <label for="country" class="form-label blue">Country</label>
                 <input  class="form-control" type="text" name="listing[country]" placeholder="enter country" required>
             </div>
-
+            
             <br>
             <button class="btn btn-dark " type="submit" style="background-color:  #d90429; border: none;" >Add</button>
  <br> <br>

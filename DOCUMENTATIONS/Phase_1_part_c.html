@@ -1,0 +1,24 @@
+
+🔹what is JOI ?
+Joi = a tool to check if user’s input is correct or not (on server side);
+it's an NPM library we need to install it
+we use a schema for server side validation
+
+
+
+🔹 What are Express errors?
+
+When something goes wrong in your app (like wrong URL, invalid data, DB problem),
+ Express lets you create and handle errors in a clean way instead of crashing.
+
+ class ExpressError extends Error {
+  constructor(status, message) {
+    super();
+    this.status = status;
+    this.message = message;
+  }
+}
+
+app.get("/secret", (req, res, next) => {
+  next(new ExpressError(401, "You are not allowed!"));
+});
