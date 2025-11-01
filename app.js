@@ -4,11 +4,16 @@ const app = express();
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
-const listings = require("./Routes/listing.js");
-const reviews = require("./Routes/review.js");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const flash = require("connect-flash");
+const passport=require("passport");
+const LocalStrategy=require("passport-local");
+const User=require("./MODELS/user.js");
+
+const listingRouter = require("./Routes/listing.js");
+const reviewRouter= require("./Routes/review.js");
+const userRouter=require("./Routes/user.js");
 
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
@@ -42,8 +47,16 @@ app.get("/", (req, res) => {
   res.render("listings/home.ejs");
 });
 
+// session
 app.use(session(sessoinOptions));
 app.use(flash());
+
+app.use(passport.initialize()); 
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()))
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
 
 app.listen(8080, () => {
   console.log("server start");
@@ -55,10 +68,12 @@ app.use((req, res, next) => {
   next();
 });
 
-//using the listing router
-app.use("/listings", listings);
 
-app.use("/listings/:id/reviews", reviews);
+
+//using the listing router
+app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/",userRouter);
 
 //middleware
 app.use((err, req, res, next) => {

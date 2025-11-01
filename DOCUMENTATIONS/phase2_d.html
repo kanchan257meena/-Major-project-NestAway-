@@ -5,4 +5,49 @@
 
  <!-- Storing password -->
   we store it's hashed form not og
-  
+
+  <!-- Hashing Function -->
+For every input, there is a fixed output.
+They are one-way functions; we can’t get input from output.
+For a different input, there is a different output but of the same length.
+Small changes in input should bring large changes in output.
+
+eg-SHA-256 
+
+<!-- Salting  -->
+ password salting is a technique to protect passwords stored in databases
+ by adding a string of 32 or more characters and then hashing them.
+eg- (%?@)
+
+<!-- Passport -->
+Passport is a tool in Node.js that helps you add login and authentication 
+to your website without writing everything from scratch. 
+
+<!-- What Passport does for you? -->
+
+Checks if username-password is correct
+Helps store user login in session (so they stay logged in)
+Lets users log in with Google, GitHub, Facebook etc with very little code
+Prevents writing login logic again and again
+
+<!-- passport local -->
+ Passport Local is just one strategy of Passport.
+It means: login using username/email and password.
+
+<!-- configuring Strategy -->
+ passport.initialize()
+This starts Passport.
+Think of it like turning the engine on so Passport can work.
+
+passport.session()
+This helps keep a user logged in across pages.
+Like remembering the user so they don’t need to log in again on every click.
+
+passport.use(new LocalStrategy(User.authenticate()))
+This tells Passport:
+Use local login (username+password) and 
+check users using our database method User.authenticate().
+
+<!-- Signup User -->
+ Get /Signup
+ post /signup
