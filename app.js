@@ -62,9 +62,11 @@ app.listen(8080, () => {
   console.log("server start");
 });
 
+// defining local variables which can be accessed in ejs file
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
     res.locals.error = req.flash("error");
+    res.locals.currUser=req.user;
   next();
 });
 
