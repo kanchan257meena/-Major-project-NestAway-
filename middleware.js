@@ -1,43 +1,51 @@
-const Listing=require("./MODELS/listing");
-const review = require("./MODELS/review.js");
-const { listingSchema ,reviewSchema} = require("./schema.js");
+const Listing = require("./MODELS/listing.js");
+const Review = require("./MODELS/review.js");
+const { listingSchema, reviewSchema } = require("./schema.js");
 const ExpressError = require("./Utils/ExpressError.js");
 
-module.exports.isLoggedIn=(req,res,next)=>{
-      if(!req.isAuthenticated()){
-        //redirectUrl save
-        req.session.redirectUrl=req.originalUrl;
-    req.flash("error","you must be logged in to create listing!");
-  return  res.redirect("/login");
+module.exports.isLoggedIn = (req, res, next) => {
+  if (!req.isAuthenticated()) {
+    //redirectUrl save
+    req.session.redirectUrl = req.originalUrl;
+    req.flash("error", "you must be logged in to create listing!");
+    return res.redirect("/login");
   }
   next();
-}
+};
 
-module.exports.saveRedirectUrl=(req,res,next)=>{
-  if(req.session.redirectUrl){
-    res.locals.redirectUrl=req.session.redirectUrl;
+module.exports.saveRedirectUrl = (req, res, next) => {
+  if (req.session.redirectUrl) {
+    res.locals.redirectUrl = req.session.redirectUrl;
   }
   next();
-}
+};
 
-module.exports.isOwner=async(req,res,next)=>{
-   let { id } = req.params;
-    let listing =await Listing.findById(id);
-    if( !listing.owner._id.equals(res.locals.currUser._id)){
-      req.flash("error","you don't have permission");
-     return res.redirect(`/listings/${id}`);
-    }
-    next();
-}
+module.exports.isOwner = async (req, res, next) => {
+  let { id } = req.params;
+  let listing = await Listing.findById(id);
+  if (!listing.owner._id.equals(res.locals.currUser._id)) {
+    req.flash("error", "you don't have permission");
+    return res.redirect(`/listings/${id}`);
+  }
+  next();
+};
 
-module.exports.isReviewAuthor=async(req,res,next)=>{
-   let { id,reviewId } = req.params;
-    let listing =await review.findById(reviewId);
-    if( !review.author._id.equals(res.locals.currUser._id)){
-      req.flash("error","you don't have permission");
-     return res.redirect(`/listings/${id}`);
-    }
-}
+module.exports.isReviewAuthor = async (req, res, next) => {
+  let { id, reviewId } = req.params;
+
+  let review = await Review.findById(reviewId);
+  if (!review) {
+    req.flash("error", "Review not found");
+    return res.redirect(`/listings/${id}`);
+  }
+
+  if (!review.author.equals(res.locals.currUser._id)) {
+    req.flash("error", "You don't have permission");
+    return res.redirect(`/listings/${id}`);
+  }
+
+  next();
+};
 
 //function for validating schema
 //it will be passed as a middleware

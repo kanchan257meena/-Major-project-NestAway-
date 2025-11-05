@@ -1,3 +1,9 @@
+if(process.env.NODE_ENV != "production"){
+  require("dotenv").config();
+}
+//console.log(process.env); //can access here any passwrd
+
+
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();

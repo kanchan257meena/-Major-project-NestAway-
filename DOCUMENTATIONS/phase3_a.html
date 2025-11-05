@@ -14,3 +14,20 @@ Example: EJS, HTML files
 Controller 
 Handles logic & flow
 Example: you click "edit", controller fetches listing and sends it to view
+<!-- Rating -->
+ starable library - github
+
+<!-- image -->
+ here we are uploading an image then storing it on cloud
+ the cloud will send the url to store in database
+
+ enctype="multipart/form-data -- this will allow to upload file
+ but sinse db only understand text - we will use MULTER(npm lib).
+
+ <!-- Cloud setup -->
+  cloudinary  
+  .env file -store imp info which we do not want to share with others
+  to exis these we use npm lib -dotenv
+
+  <!-- Multer Store Cloudinary -->
+   npm i cloudinary multer-storage-cloudinary

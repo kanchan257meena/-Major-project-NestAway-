@@ -5,8 +5,8 @@
             <div class="col-8 offset-2">
                 <br><br>
         <h3 class="red">Create a new listing</h3>
-        <form method="post" action="/listings" novalidate class="needs-validation">
-           
+        <form method="post" action="/listings" novalidate class="needs-validation" enctype="multipart/form-data" > 
+           <!-- enctype is used to allow multimedia to share -->
             <div class="mb-3">
                 <label for="title" class="form-label blue">Title</label>
                 <input class="form-control"  type="text" name="listing[title]" placeholder="enter title" required>
@@ -19,10 +19,12 @@
             </div class="mb-3">
 
 
-            <div class="mb-3"> 
-                <label for="image" class="form-label blue">Image</label>
-                <input class="form-control" type="text" name="listing[image]" placeholder="enter image URL">
+           
+             <div class="mb-3"> 
+                <label for="image" class="form-label blue">Upload Image</label>
+                <input class="form-control" type="file" name="listing[image]" >
             </div>
+
             <div class="row">
             <div class="mb-3 col-md-4">
                  <label for="price" class="form-label blue">Price</label>
