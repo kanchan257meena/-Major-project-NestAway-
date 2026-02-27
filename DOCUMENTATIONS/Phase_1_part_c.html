@@ -1,10 +1,23 @@
+WrapAsync -> 
+wrapAsync = Express catching errors for you
+
+Validation for Schema -> how to handle req from db side (if someone uses postman)
+
 
 🔹what is JOI ?
 Joi = a tool to check if user’s input is correct or not (on server side);
 it's an NPM library we need to install it
 we use a schema for server side validation
 
+-> we do this in Schema.js ,there we set everything required .
+we will use listingSchema.validate(req.body) in post route in app.js
+// Joi will only detect the error 
+then well will throw Express Error
 
+
+VALIDATE LISTING 
+->make a fn in app.js name validate listing ,and put all the validating code in that
+then this will be passed as a middleware every where
 
 🔹 What are Express errors?
 

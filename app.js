@@ -49,9 +49,10 @@ const sessoinOptions = {
   },
 };
 
-app.get("/", (req, res) => {
-  res.render("listings/home.ejs");
-});
+// app.get("/", (req, res) => {
+//   res.render("listings/home.ejs");
+// });
+
 
 // session
 app.use(session(sessoinOptions));
@@ -83,6 +84,8 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/",userRouter);
 
+
+
 //middleware
 app.use((err, req, res, next) => {
   // res.send("something went wrong");
@@ -91,25 +94,9 @@ app.use((err, req, res, next) => {
   // res.status(statusCode).send(message);
 });
 
+
+
 // app.all(/.*/,(req,res,next)=>{  //This is something different for express 5
 //   next(new ExpressError(404,"Page Not Found"));
 // })
 
-//listings
-// app.get("/testlisting",async (req,res)=>{
-//     let sampleListing=new Listing({
-//         title:"My new Villa",
-//         description:"By the beach",
-//         price:1200,
-//         location:"Goa",
-//         country:"india",
-//     });
-
-//  await   sampleListing.save().then((res)=>{
-//     console.log(res);
-
-//  })
-//  console.log("saved");
-//  res.send("successfull testing");
-
-// });

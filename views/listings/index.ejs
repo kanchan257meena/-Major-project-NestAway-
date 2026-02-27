@@ -1,13 +1,58 @@
 <% layout('/layouts/boilerplate') -%>
 
-  <body>
+<style>
+  .filters{
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .filter{
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.7;
+    /* color: ; */
+  }
+
+  .filter:hover{
+    opacity: 1;
+    cursor: pointer;
+  }
+  .filter p {
+    font-size: 0.8rem;
+  }
+
+  .tax-toggle{
+
+  }
+</style>
+
   
     <!-- CARDS -->
-<div class="container my-4">
+<div class="container ">
   
-  <h3>All Listings</h3>
+  <!-- <h3>All Listings</h3> -->
+   <div class="filters" id="filters">
+    <div class="filter"> <div><i class="fa-solid fa-fire"></i></div><p>Trending</p></div>
+    <div class="filter"> <div><i class="fa-solid fa-bed"></i></div><p>Rooms</p></div>
+    <div class="filter"> <div><i class="fa-solid fa-mountain-city"></i></div><p>Iconic Cities</p></div>
+    <div class="filter"> <div><i class="fa-solid fa-mountain"></i></div><p>Mountains</p></div>
+    <div class="filter"> <div><i class="fa-solid fa-fort-awesome"></i></div><p>Castles</p></div>
+    <div class="filter"> <div><i class="fa-solid fa-person-swimming"></i></div><p>Amazing Pools</p></div>
+    <div class="filter"> <div><i class="fa-solid fa-campground"></i></div><p>Camping</p></div>
+    <div class="filter"> <div><i class="fa-solid fa-cow"></i></div><p>Farms</p></div>
+    <div class="filter"> <div><i class="fa-solid fa-snowflake"></i></div><p>Arctic</p></div>
+    
 
-  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+    <!-- TAX TOGGLE -->
+    <!-- <div class="tax-toggle"><div class="form-check form-check-reverse form-switch">
+  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+  <label class="form-check-label" for="flexSwitchCheckDefault">Display total after t</label>
+</div></div> -->
+
+   </div>
+
+  <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-3">
     <% for (let listing of allListings) { %>
       <div class="col">
         <div class="card listing-card h-100">
@@ -28,4 +73,3 @@
    
 
 
-  </body>

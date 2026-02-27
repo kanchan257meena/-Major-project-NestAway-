@@ -32,7 +32,7 @@ router.get(
 );
 
 //can't update directly so we use a method override
-router.put("/:id", isLoggedIn, isOwner, wrapAsync(listingController.update));
+router.put("/:id", isLoggedIn, isOwner, upload.single("listing[image]"),validateListing, wrapAsync(listingController.update));
 
 //DELETE
 router.delete("/:id", isLoggedIn, isOwner, wrapAsync(listingController.delete));
