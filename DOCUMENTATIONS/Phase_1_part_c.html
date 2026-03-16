@@ -1,8 +1,59 @@
+FORM VALIDATION -> when we enter data in the form , the browser and/or the web server will check 
+to see that the data is in the correct format and within the constraints
+
+client side -> the data client send to backend must be correct (frontend -> backend)
+server side -> database schema must be followed (it includes error handling)
+
+
+client Side :
+->set fields required (depends on browser);
+->we add bootstrap styling using novalidate  (needs-validation class)
+add this to public>js>script.js
+
+CUSTOM ERROR HANDLING : using middle ware to handle error 
+so that the program do not crash 
+
 WrapAsync -> 
-wrapAsync = Express catching errors for you
+wrapAsync = Express catching errors for you (Utils folder will contain wrapAsync.js);
+//Study in detail what is wrapAsync
 
-Validation for Schema -> how to handle req from db side (if someone uses postman)
 
+Validation for Schema -> how to handle req from db side (if someone uses postman or other services to post req)
+
+
+VALIDATE LISTING 
+->make a fn in app.js name validate listing ,and put all the validating code in that
+then this will be passed as a middleware every where
+//listingSchema.validate -> how is this working?
+
+
+🔹 What are Express errors?
+
+When something goes wrong in your app (like wrong URL, invalid data, DB problem),
+ Express lets you create and handle errors in a clean way instead of crashing.
+ Utils>ExpressError.js
+ class ExpressError extends Error {
+  constructor(status, message) {
+    super();
+    this.status = status;
+    this.message = message;
+  }
+}
+
+//Difference btw wrapAsync and Express errors?
+
+app.get("/secret", (req, res, next) => {
+  next(new ExpressError(401, "You are not allowed!"));
+});
+
+express.ejs (in views) give styling to error to give an alert
+
+
+
+Server Side :
+
+still user can send wrong data from server side like(postman),
+so we need to validate from that side too.
 
 🔹what is JOI ?
 Joi = a tool to check if user’s input is correct or not (on server side);
@@ -15,23 +66,8 @@ we will use listingSchema.validate(req.body) in post route in app.js
 then well will throw Express Error
 
 
-VALIDATE LISTING 
-->make a fn in app.js name validate listing ,and put all the validating code in that
-then this will be passed as a middleware every where
+difference between all the type of errors used in project
 
-🔹 What are Express errors?
 
-When something goes wrong in your app (like wrong URL, invalid data, DB problem),
- Express lets you create and handle errors in a clean way instead of crashing.
-
- class ExpressError extends Error {
-  constructor(status, message) {
-    super();
-    this.status = status;
-    this.message = message;
-  }
-}
-
-app.get("/secret", (req, res, next) => {
-  next(new ExpressError(401, "You are not allowed!"));
-});
+// middleware.js -> a file that contains all the error handling 
+it is also using schema in schema.js

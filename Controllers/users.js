@@ -25,6 +25,8 @@ module.exports.signup=async (req, res) => {
     res.redirect(redirectUrl);
   };
 
+
+  // logout
   module.exports.logout=(req, res, next) => {
   req.logout(err => {
     if (err) {

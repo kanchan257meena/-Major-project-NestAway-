@@ -14,20 +14,105 @@ Example: EJS, HTML files
 Controller 
 Handles logic & flow
 Example: you click "edit", controller fetches listing and sends it to view
+eg routes>listing index route k asyn callback ko dusri file me shift karenge
+router.get("/",wrapAsync(index));
+ index in in controler>listing.js
+
+
+Same we will do for reviews and user
+
+<!-- Router.route -->
+ router.route() is used to define multiple HTTP request methods
+  for the same route path in one place.
+  It helps organize code and avoids repeating the same URL again and again.
+router
+  .route("/users")
+  .get(getAllUsers)
+  .post(createUser)
+  .put(updateUser)
+  .delete(deleteUser);
+
 <!-- Rating -->
  starable library - github
 
+ we will use css file and basic code 
+ we used slot  { css>rating.css}
+ include in boiler plate
+ listing>show.ejs 
+ paste code from readme to apply star 
+
+ we can also show static result 
+ code is there for this too
+ data-rating =review.rating
+
+ to send data to db - name=review[rating]
+
+
 <!-- image -->
+ problems in uploading img :
+ 1) sending files from the form
+ 2)mongoDb has limit of size
+ 
+ to solve this problem
+ we use a 3rd party service to apload img
+ 
  here we are uploading an image then storing it on cloud
  the cloud will send the url to store in database
 
+ //MANIPULATING FORM
+ change encoding type {views>listing>new}
+ type=file
  enctype="multipart/form-data -- this will allow to upload file
  but sinse db only understand text - we will use MULTER(npm lib).
+ MULTER is a node.js middleware for handling multipart/form-data,which is primarily used
+ for uploading files. It is written on top of busyboy for maximum efficiency
+  
+ routes>listing.js 
+ require multer , then we will pass middleware in the post route (upload.single('listing[imagr]'))
+ currently it will save image in a folder but we will put it on cloud
 
  <!-- Cloud setup -->
-  cloudinary  
-  .env file -store imp info which we do not want to share with others
+  cloudinary & .env file 
+  -store imp info which we do not want to share with others
   to exis these we use npm lib -dotenv
 
+  sign up and come to dashboard
+  ->we take product environment credential ,we don't share these credentials on git so we write them in a seperate file
+  .env file -> store our environment var 
+  here creds are stored in key value pair {eg SECRET=helloworld}
+
+ ->to access these env cred on app.js we use library called dotenv 
+ now store cloudnary creds on env.
+
+ in app.js
+ require('dotenv').config();
+ now we can use process.env.SECRET anywhere
+
   <!-- Multer Store Cloudinary -->
+   since multer and cloudinary are used together too frequentially so there exist a library for them
+   npm i cloudinary
    npm i cloudinary multer-storage-cloudinary
+
+   now to use these libraries we will make a seperate file (cloudConfig.js)
+   now require both libraries ,then use cloudinary.config() 
+   const storage = .... // a code in cloudinary documentation
+
+   now earlier multer was uploading files in our own system folder 
+   now we will provide it the location of storage 
+
+   FLOW 
+   form(file)-> backend(parse)->cloud(store)->URl/link(file)  {req.file ->we will send this link to db}
+
+
+   <!-- SAVE LINK IN MongoDb -->
+    before img->string 
+    now img-> path(url) +  filename
+
+    controller>listing.js 
+    create listing -> let url=req.file.path;
+    newListing.image={url,filename}
+
+    <!--Display image -->
+    init>data.js we change the schema of image for the existing listing , and give filename and url to each
+
+    now we also have to make changes in index and show  (views>listing) - listing.image.url

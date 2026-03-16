@@ -1,0 +1,90 @@
+<!-- EDIT Listing image -->
+ it still has url only 
+ 
+ view>listing>edit.ejs
+ form enctype="multipart/form-data"
+ input type="file"
+
+ pass same middleware in the put route as we used in post route (routes>listing)
+
+ now controllers>listings 
+ we use same logic of finding and adding url and filename to update listing
+
+ <!-- IMG Previe for edit -->
+  to show last image in edit file
+  we will only show the preview of img to save storage so we are using the image transformation link of cloudinary
+
+  <!-- Map feature -->
+
+  we will use map box api
+
+  <!-- Map box (but we will not use it) -->
+   -> put style sheet link and js link in boilerplate
+   ->show.ejs =
+    <div class="col-8 offset-3 mb-3" >
+        <h3>Where you'll be</h3>
+        <div id="map"></div>
+   </div>
+     ->add styling to css height =400px , w=80vh
+
+   -> add an extra script to show (write map token from env var in env file)
+   ->change the center of map
+--> we make a map.js file in public>js and push all script there (but env var not accessible here)
+so in show.ejs 
+<!-- <script> const mapToken=<%= process.env.MAP_TOKEN %> /script>   -->
+
+<!-- GEOCODING -->
+ converting address into geographic coordinates
+
+ we will use api for this (map box geocoding api)
+ there are 2 way geocoding
+we will use mapbox sdk (specially for js)
+ nmp install @mapbox/mapbox-sdk
+
+ ->Controllers>listing.js>create listing
+ here we will access location cord
+ require sdk services (mbxGeocoding) ,mapToken ,geocodingClient
+  -> in create listing 
+
+  let response=await geocodingClient.forwardGeocode({
+    query:req.body.listing.location,
+    limit:1,
+  }).send();
+
+  newListing.geometry=response.body.features[0].geometry;
+
+<!-- Storing Coordinates -->
+ same format as response was giving
+ GeoJSON //longitude comes first in mapbox not latitude
+ model>listing.js
+geometry: {
+  type: {
+    type: String,   // Don't do { location: { type: String } }
+    enum: ['Point'], // location.type must be 'Point'
+    required: true
+  },
+  coordinates: {
+    type: [Number],
+    required: true
+  }
+}
+
+->Controllers>listing.js>create listing
+newListing.geometry=response.body.features[0].geometry;
+let savedListing=await newListing
+
+
+<!-- Map Maker -->
+when we want to pin point a specific location 
+public >js>map.js
+const marker1=new mapboxl.Marker().setLngLat([,]) //Listing.geometry.coordinates
+.addTo(map); 
+
+ we will shift these coordinates from show.ejs to map.js
+
+ show.ejs 
+ const coordinates=<%- JSON.stringify(listing.geometry.coordinates)%>
+
+ change center to coordinates
+
+ <!-- Marker Popup -->

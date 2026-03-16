@@ -1,4 +1,6 @@
 Handling deletion (using Mongoose Middleware)
+ 
+Type of middle ware -> we will use query midddleware 
 
 we can use 2 middleware
 -> pre-run before the query is executed (
@@ -13,6 +15,7 @@ which will call Mongoose middleware;
 
 
 <!-- NEW MODEL REVIEWS -->
+ schema (mongo)
  -comment {string}
  -rating(1 to 5) 
  -createdAt {date ,time}
@@ -21,11 +24,12 @@ which will call Mongoose middleware;
  create a review schema and add and array in the listing schema
 
  <!-- creting reviews -->
-  1.setting up the Review form
+  1.setting up the Review form (views>listing>show)
 
   2.submitting the form 
-  here we will create a relationship of the review witht the listing(one to many)
+  here we will create a relationship of the review with the listing(one to many)
   post/listings/:id/reviews 
+  
 
   
  <!-- Validation for reviews -->

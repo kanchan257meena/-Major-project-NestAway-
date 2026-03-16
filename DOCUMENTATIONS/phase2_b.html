@@ -2,12 +2,23 @@
  It helps you organize routes (like /users, /listings, /orders, etc.) 
  into separate files, 
  instead of keeping all routes inside one giant app.js.
+const router=express.router()
+ ->copy all the routes to respected file in Routes forlder
+ change app.get -> router.get , then we will export the router obj
+ app.js 
+ -> const lstings=require("./Routes/listing.js")
+ -> app.use("/listings",listings)
+
+ require all the things needed in Routes (middleware etc)
+
+
 
  <!-- merge params -->
 
  “Merge params” literally means combining multiple sets of parameters 
  (data values, usually key–value pairs) into one object or dictionary.
-
+ so that we can send the listing id to review route
+ const router=express.router(mergeParams:true)
 
  <!-- web cookies -->
   Web cookies (also called HTTP cookies or browser cookies) are small pieces of data
@@ -18,6 +29,18 @@ They help websites remember information about you — like your login,
 
  A cookie is usually stored as a key–value pair.
 
+ web server creates data and web browser saves this data
+
+ res.cookie("greet","hello");
+
  <!-- cookie parser -->
+  middleware
  Cookie-parser is a tool that helps Express apps read and manage cookies easily
+ used to parse cookies
+ why do we need it?
+
+ what is signed cookie?
+
+
+
 

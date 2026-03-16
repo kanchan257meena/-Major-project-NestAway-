@@ -3,6 +3,8 @@
 A Session is like a special folder created by the server
  to store a user’s information while they are using the website.
 
+ the time between user log in and log out on a web site
+
  <!-- What is “State”? -->
 
 State simply means remembering data or information about a user or system for some time.
@@ -20,6 +22,9 @@ When you open a website, do something (like login, add items to cart, etc.),
   while they browse different pages.
 Normally, websites forget you on every page.
  Express Session helps the server remember you.
+
+ cookies store the session id on the browser while rest of the information is stored on 
+ server ,  cookies size is small 
 
 
 <!-- What is express-session (npm package)? -->
@@ -42,9 +47,53 @@ app.use(session({
 The secret works like a password for your sessions —
  it protects the data from being modified by anyone else.
 
+ <!-- Storing and using info -->
+  /register
+  name=req.query;
+  req.session.name=name;
+
+  /hello
+  res.send(`hello ${req.session.name}`)
+  
+  same session diff route
+
 
  <!-- connect flash --> it is an npm library
   Connect Flash helps you show one-time messages to the user 
   (like “Login Successful!” or “Error: Invalid Password”) and
    then automatically removes them.
  -> it is cumpulsory to use sessions to use flash  
+
+ app.use(flash()); // after requiring
+ it works on key-message pain
+ it works only with views (ejs file)
+
+ req.flash("success",user registered successfully!);
+
+
+ <!-- res.locals -->
+
+ res.locals is a place where you can store data for the current
+  request and use it later in the same request (usually in views/templates).
+
+
+  app.get("/home", (req, res) => {
+  res.locals.message = req.flash("success");
+  res.render("home");
+});
+
+we use middlewares instead
+
+
+<!-- Flash Success / Flash Failure Includes -->
+ save both success and error in res.locals(int app.js)
+
+views>includes>flash.ejs {
+  use condition , and add button
+}
+add it to boiler plate
+we'll use bootstrap for styling
+
+
+
+

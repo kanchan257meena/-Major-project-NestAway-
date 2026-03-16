@@ -1,3 +1,4 @@
+//for storing and using credentials from .env files
 if(process.env.NODE_ENV != "production"){
   require("dotenv").config();
 }
@@ -10,13 +11,18 @@ const app = express();
 const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
+
+// session ,cookie and flash
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
 const flash = require("connect-flash");
+
+// user Authentication (passport)
 const passport=require("passport");
 const LocalStrategy=require("passport-local");
 const User=require("./MODELS/user.js");
 
+// Routers for various requests
 const listingRouter = require("./Routes/listing.js");
 const reviewRouter= require("./Routes/review.js");
 const userRouter=require("./Routes/user.js");
@@ -58,6 +64,7 @@ const sessoinOptions = {
 app.use(session(sessoinOptions));
 app.use(flash());
 
+//  user Authentication(Passport)
 app.use(passport.initialize()); 
 app.use(passport.session());
 passport.use(new LocalStrategy(User.authenticate()))

@@ -4,16 +4,80 @@ How to check if User is Logged in?
 -> req.isAuthenticated() //passport method
 
 before creating a new listing we need to make sure that the user is logged in.
+we will use condition to check else we will redirect to login page
 
-we will make isLoggedIn middle ware
+we will make isLoggedIn middle ware (cause applying conditon on every route is 
+tedious and will increase the code)
 
+<!-- Middleware -->
+ here comes in picture middleware.js where we will put all the middlewares
+use it on upadate,edit,create, delete etc.
+
+<!-- Logout User -->
+ GET /logout
+ we will use req.logout() mtd of passport
+
+ <!-- styling -->
+  includes>navbar 
+  put <a> tag
+    user req.user to see the status{undefined,obj} of user and display optn accordingly
+
+    but req.user cannot be directly accessed by ejs file so we will store it in local var
+    res.locals.currUser=req.user;
 
 <!-- Login after Signup -->
  Passport's login method automatically establishes a login session
 We can invoke login to automatically login a user.
 
+we want that as the user signup it should also login.
+we call req.login(user,callback fn)
+
 <!-- post-login Page  -->
  ->path ->login -> path
+ if login is required then user must be redirected to where he wanted to
+ req obj stores the path of the route (req.path , req.originalURL){
+  so after logic we redirect to ogurl (req.session.redirectURL)
+
+  routs>user.js -> router.post("/login") = we redirect to path
+
+problem -> as we login session change
+so we save it to local (and pass it as mdl ware)
+ }
+
 
  <!-- Listing Owner -->
   omly owner should be allowed to edit and delete listing or rewiew
+
+  we add owner in listing schema {models>listings}
+  we will reinitialise the db cause earlier we didn't add owner 
+
+  we can also print it in show.ejs listing.owner.username
+
+  we post the username on create route , current user = new listing owner
+  owner=req.user._id
+
+  <!-- Authorization -->
+
+  hide delete and edit button for user who are not owner
+   we compare listing.owner._id and current user id(stored in res.local.curruser)
+
+   we apply condition on buttons in show.ejs
+
+   <!-- authorization for listings -->
+
+   we'll use condition on diff routes(edit, update)
+(!listing.owner.equals(currUser._id))
+ we will create middleware isOwner
+
+ <!-- authorization for review-->
+  every review should have it's author
+  only author can have access to it
+  ->update schema , add author
+
+  only a logged in user should be able to write a review , so we put a conditon in show.ejs (frontend)
+  backend path we pass isLogged in middleware in review schema
+
+SHOW NAME OF AUTHOR 
+populate author on show route of listing 
+
+what is populate

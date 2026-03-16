@@ -255,3 +255,9 @@ edf2f4 light
         /* back to normal */
     }
 }
+
+/* map */
+#map{
+height:400px;
+width:100%;
+}
