@@ -259,5 +259,7 @@ edf2f4 light
 /* map */
 #map{
 height:400px;
-width:100%;
+width:80vh;
+margin: auto;
+/* background-color: #d90429; */
 }

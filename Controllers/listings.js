@@ -1,4 +1,6 @@
 const Listing = require("../MODELS/listing");
+// const fetch = require("node-fetch");
+
 
 //index
 module.exports.index = async (req, res) => {
@@ -18,6 +20,42 @@ module.exports.new = (req, res) => {
 
 //create
 module.exports.create = async (req, res, next) => {
+
+  const location = req.body.listing.location;
+
+  
+const response = await fetch(
+`https://nominatim.openstreetmap.org/search?q=${location}&format=json&limit=1`,
+{
+headers:{
+"User-Agent":"major-project-app"
+}
+});
+
+  const data = await response.json();
+
+  const lon = data[0].lon;
+  const lat = data[0].lat;
+
+  let url = req.file.path;
+  let filename = req.file.filename;
+
+  let newListing = new Listing(req.body.listing);
+  newListing.owner = req.user._id;
+  newListing.image = { url, filename };
+
+  newListing.geometry = {
+    type: "Point",
+    coordinates: [lon, lat]
+  };
+
+  await newListing.save();
+
+  req.flash("success", "New Listing Created!");
+  res.redirect("/listings");
+};
+/*
+module.exports.create = async (req, res, next) => {
   //if anything goes wrong we'll send err
   let url = req.file.path;
   let filename = req.file.filename;
@@ -25,10 +63,12 @@ module.exports.create = async (req, res, next) => {
   let newListing = new Listing(req.body.listing);
   newListing.owner = req.user._id;
   newListing.image = { url, filename };
+
+
   await newListing.save();
   req.flash("success", "New Listing Created! ");
   res.redirect("/listings");
-};
+};*/
 
 //show
 module.exports.show = async (req, res) => {
@@ -92,3 +132,6 @@ module.exports.delete = async (req, res) => {
     console.log(err);
   }
 };
+
+
+
