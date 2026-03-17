@@ -34,8 +34,7 @@ headers:{
 
   const data = await response.json();
 
-  const lon = data[0].lon;
-  const lat = data[0].lat;
+ 
 
   let url = req.file.path;
   let filename = req.file.filename;
@@ -44,6 +43,9 @@ headers:{
   newListing.owner = req.user._id;
   newListing.image = { url, filename };
 
+// map
+ const lon = data[0].lon;
+  const lat = data[0].lat;
   newListing.geometry = {
     type: "Point",
     coordinates: [lon, lat]
@@ -54,21 +56,7 @@ headers:{
   req.flash("success", "New Listing Created!");
   res.redirect("/listings");
 };
-/*
-module.exports.create = async (req, res, next) => {
-  //if anything goes wrong we'll send err
-  let url = req.file.path;
-  let filename = req.file.filename;
 
-  let newListing = new Listing(req.body.listing);
-  newListing.owner = req.user._id;
-  newListing.image = { url, filename };
-
-
-  await newListing.save();
-  req.flash("success", "New Listing Created! ");
-  res.redirect("/listings");
-};*/
 
 //show
 module.exports.show = async (req, res) => {
@@ -133,5 +121,14 @@ module.exports.delete = async (req, res) => {
   }
 };
 
+// Map to show all listings
+module.exports.mapPage = async (req, res) => {
+  const listings = await Listing.find(
+    { geometry: { $exists: true } },
+    { title: 1, location: 1, geometry: 1 }
+  );
 
+  console.log("Listings count:", listings.length);
 
+  res.render("listings/map.ejs", { listings });
+};

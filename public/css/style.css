@@ -263,3 +263,10 @@ width:80vh;
 margin: auto;
 /* background-color: #d90429; */
 }
+
+/* All in one map */
+#allmap{
+height:500px;
+width:100%;
+/* background-color: lightcoral; */
+}

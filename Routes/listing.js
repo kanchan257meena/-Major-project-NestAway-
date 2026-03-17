@@ -16,6 +16,9 @@ router.get("/new", isLoggedIn, listingController.new);
 
 router.post("/", validateListing, upload.single("listing[image]"),wrapAsync(listingController.create));
 
+// Map to show all listings 
+router.get("/map", listingController.mapPage);
+
 
 //show route  {return all the data , after we click on link this page will open}
 router.get("/:id", wrapAsync(listingController.show));
@@ -37,4 +40,8 @@ router.put("/:id", isLoggedIn, isOwner, upload.single("listing[image]"),validate
 //DELETE
 router.delete("/:id", isLoggedIn, isOwner, wrapAsync(listingController.delete));
 
+
+
 module.exports = router;
+
+

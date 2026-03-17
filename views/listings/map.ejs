@@ -1,0 +1,19 @@
+<h2>All Listings Map</h2>
+
+<div id="allmap"></div>
+<link rel="stylesheet" href="/css/style.css">
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<!-- VERY IMPORTANT -->
+
+<script>
+  window.listings = JSON.parse(`<%- JSON.stringify(listings) %>`);
+</script>
+
+
+
+<!-- THIS MUST BE LAST -->
+<script src="/js/mapAll.js"></script>
